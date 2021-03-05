@@ -40,7 +40,7 @@ button {
 input , select {
   width: 60%;
 }
-input[type="text"], input[type="date"] , select {
+.form-control, input[type="date"] , select {
   border: none;
   background: #fff;
   font-size: 13px;
@@ -80,7 +80,6 @@ h3 {
 h4 {
   font-size: 18px;
   font-weight: 300;
-  margin: 0;
 }
 
 /*======Personel Style =====*/
@@ -146,6 +145,11 @@ h4 {
   background-color: #757dcecc;
 
 }
+.btn-outline {
+  border: 1px solid #1505b51a;
+  background-color: #0025ff08;
+  color: #333;
+}
 
 .row {
   width: 80%;
@@ -166,4 +170,8 @@ h4 {
 }
 .btn-dark {
   background-color: #03051fcc;
+}
+
+.f-light {
+  font-weight: 100;
 }

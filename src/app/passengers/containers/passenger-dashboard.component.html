@@ -1,6 +1,17 @@
 <div class="paseenger-dashboard bg-light">
   <div class="container">
-  <!---  <passenger-counter [items]="passengers"></passenger-counter>-->
+    <div class="dashboard-head">
+      <div class="left-side">
+        <passenger-counter [items]="passengers"></passenger-counter>
+      <input type="text" (input)="searchByFullName($event)" placeholder="Search By Full Name" class="form-control f-light" name="" id="" />
+      </div>
+      <div class="right-side">
+        <p>Filter : </p>
+        <hr>
+        <label for="">Checked In Passenger : </label>
+        <button (click)="checkedInPassenger()" class="btn btn-outline">Checked In</button>
+      </div>
+    </div>
     <div class="passenger-list flex">
       <passenger-list
         *ngFor="let passenger of passengers"

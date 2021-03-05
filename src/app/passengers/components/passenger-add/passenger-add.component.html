@@ -3,23 +3,23 @@
             <form action="" #form ="ngForm">
                 <div class="form-group">
                     <label for="fullName">Full Name</label>
-                    <input type="text" name="fullName" id="fullName" [(ngModel)]="passenger.fullName">
+                    <input type="text" name="fullName" id="fullName" class="form-control" [(ngModel)]="passenger.fullName">
                 </div>
                 <div class="form-group">
                     <label for="checkedIn">Check In</label>
-                    <input type="checkbox" name="checkedIn" id="checkedIn"  [(ngModel)]="passenger.checkedIn">
+                    <input type="checkbox" name="checkedIn" id="checkedIn"   [(ngModel)]="passenger.checkedIn">
                 </div>
                 <div class="form-group">
                     <label for="checkInDate">Date Check</label>
-                    <input type="date" name="checkInDate" id="checkInDate"  [(ngModel)]="passenger.checkInDate">
+                    <input type="date" name="checkInDate" id="checkInDate" class="form-control" [(ngModel)]="passenger.checkInDate">
                 </div>
-               <div class="form-group">	
+               <div class="form-group">
                 <label for="children">Children</label>
-                <select name="children" id="children"  [(ngModel)]="passenger.children">
+                <select name="children" id="children"  class="form-control" [(ngModel)]="passenger.children">
                     <option value="children1">Children1</option>
                     <option value="children2">Children2</option>
                     <option value="children3">Children3</option>
-                </select>   
+                </select>
                </div>
                <div class="form-group center">
                    <button class="btn btn-primary" (click)="onSubmit(form)">Create</button>

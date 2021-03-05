@@ -17,16 +17,24 @@ export class PassengerService {
     return this.http.get<Passenger[]>(this.baseUrl+"/passengers");
   }
 
-  deleteProduct(passenger:Passenger):Observable<void>{
+  deletePassengers(passenger:Passenger):Observable<void>{
     return this.http.delete<void>(this.baseUrl+"/passengers/"+passenger.id);
   }
 
-  updateProduct(passenger:Passenger):Observable<Passenger>{
+  updatePassengers(passenger:Passenger):Observable<Passenger>{
     return this.http.put<Passenger>(this.baseUrl+"/passengers/"+passenger.id,passenger);
   }
 
   save(passenger:Passenger):Observable<Passenger>{
     return this.http.post<Passenger>(this.baseUrl+"/passengers",passenger);
+  }
+
+  searchPassengers(keyword:string):Observable<Passenger[]>{
+    return this.http.get<Passenger[]>(this.baseUrl+"/passengers?fullName_like="+keyword);
+  }
+
+  getCheckedInPassenger():Observable<Passenger[]>{
+    return this.http.get<Passenger[]>(this.baseUrl+"/passengers?checkedIn=true");
   }
 
 }

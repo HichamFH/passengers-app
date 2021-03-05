@@ -5,3 +5,27 @@
   .passenger-list .flex {
       justify-content: space-between;
   }
+  .dashboard-head {
+    width: 100%;
+    background: #fbfbfb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 15px;
+  }
+  .dashboard-head .left-side {
+    flex-basis: 80%;
+  }
+  .dashboard-head .right-side {
+    flex-basis: 20%;
+  }
+  .dashboard-head .right-side p {
+    font-size: 1.2em;
+  }
+  .dashboard-head .right-side hr {
+    opacity: .2;
+  }
+  .dashboard-head h4 {
+    margin-bottom: 10px;
+  }

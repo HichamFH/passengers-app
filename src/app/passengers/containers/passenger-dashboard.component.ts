@@ -5,6 +5,7 @@ import { map } from "rxjs/operators";
 import { PassengerService } from "src/app/services/passenger.service";
 
 import { Passenger } from "src/assets/passengers";
+import Swal from 'sweetalert2'
 
 @Component({
   selector: "component-dashboard",
@@ -18,6 +19,7 @@ export class PassengerDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getAllPassengers();
+    
   }
 
   // GetAllPassenger Function 
@@ -31,10 +33,12 @@ export class PassengerDashboardComponent implements OnInit {
     );
   }
 
+
+  
   onDelete(p: Passenger) {
     let v=confirm("Etes vous sûre?");
     if(v==true)
-   this.passengerService.deleteProduct(p)
+   this.passengerService.deletePassengers(p)
      .subscribe(data=>{
        this.getAllPassengers();
      })
@@ -50,7 +54,7 @@ export class PassengerDashboardComponent implements OnInit {
             ret = Object.assign({}, p, passenger);
 
 
-        this.passengerService.updateProduct(passenger).subscribe(
+        this.passengerService.updatePassengers(passenger).subscribe(
           res => {
             this.toastr.success('Update !', 'Updated OK!');
           },
@@ -68,12 +72,40 @@ export class PassengerDashboardComponent implements OnInit {
   }
 
   removePassenger(p: Passenger) {
-   let v=confirm("Etes vous sûre?");
-    if(v==true)
-   this.passengerService.deleteProduct(p)
-     .subscribe(data=>{
-       this.getAllPassengers();
-     })
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.passengerService.deletePassengers(p).subscribe((data) => {
+          this.getAllPassengers();
+        });
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+  }
+
+
+  searchByFullName(event : any) {
+    this.passengerService.searchPassengers(event.target.value).subscribe(
+      res => {
+        this.passengers = res
+
+      }
+    )
+  }
+
+  checkedInPassenger() {
+    this.passengerService.getCheckedInPassenger().subscribe(
+      res => {
+        this.passengers = res;
+      }
+    )
   }
 
   
