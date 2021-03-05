@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header">
+    <span
+      class="status"
+      [ngClass]="{
+        'checked-in': passenger.checkedIn,
+        'checked-out': !passenger.checkedIn
+      }"
+    ></span>
+    <input
+      type="text"
+      [value]="passenger.fullName"
+      *ngIf="editing"
+      (input)="handleFullNameEdit($event)"
+    />
+    <span *ngIf="!editing">{{ passenger.fullName }}</span>
+  </div>
+  <div class="card-body">
+    <div class="checkin-date">
+      Check in date :
+      {{
+        passenger.checkInDate
+          ? (passenger.checkInDate | date: "y MMMM d" | uppercase)
+          : "not checked in"
+      }}
+    </div>
+    <div class="children">Children : {{ passenger.children?.length || 0 }}</div>
+  </div>
+  <div class="card-footer">
+    <div class="action">
+      <button class="btn btn-edit" (click)="toggleEdit()">{{ editing ? "done" : "edit" }}</button>
+      <button class="btn btn-delete" (click)="handleRemove(passenger)">remove</button>
+    </div>
+  </div>
+</div>

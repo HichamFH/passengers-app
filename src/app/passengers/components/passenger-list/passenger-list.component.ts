@@ -3,39 +3,13 @@ import { Passenger } from "src/assets/passengers";
 
 @Component({
   selector: "passenger-list",
-  template: `<span
-      class="status"
-      [ngClass]="{
-        'checked-in': passenger.checkedIn,
-        'checked-out': !passenger.checkedIn
-      }"
-    ></span>
-    <input
-      type="text"
-      [value]="passenger.fullName"
-      *ngIf="editing"
-      (input)="handleFullNameEdit($event)"
-    />
-    <span *ngIf="!editing">{{ passenger.fullName }}</span>
-    <div class="checkin-date">
-      Check in date :
-      {{
-        passenger.checkInDate
-          ? (passenger.checkInDate | date: "y MMMM d" | uppercase)
-          : "not checked in"
-      }}
-    </div>
-    <div class="children">Children : {{ passenger.children?.length || 0 }}</div>
-    <div class="action">
-      <button (click)="toggleEdit()">{{ editing ? "done" : "edit" }}</button>
-      <button (click)="handleRemove(passenger.id)">remove</button>
-    </div>`,
+  templateUrl: './passenger-list.component.html',
   styleUrls: ["./passenger-list.component.css"],
 })
 export class PassengerListComponent {
   @Input() passenger: Passenger;
   @Output() edit: EventEmitter<Passenger> = new EventEmitter();
-  @Output() remove: EventEmitter<number> = new EventEmitter();
+  @Output() remove: EventEmitter<Passenger> = new EventEmitter();
   editing: boolean = false;
   passengerToEmit: Passenger;
 
@@ -50,7 +24,7 @@ export class PassengerListComponent {
     this.passengerToEmit = { ...this.passenger, fullName: event.target.value };
   }
 
-  handleRemove(id: number) {
-    this.remove.emit(id);
+  handleRemove(passenger: Passenger) {
+    this.remove.emit(passenger);
   }
 }

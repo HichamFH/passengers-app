@@ -13,3 +13,8 @@
 .status.checked-out {
   background-color: tomato;
 }
+
+.card-header span {
+  font-size: 1.1em;
+}
+

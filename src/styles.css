@@ -37,7 +37,10 @@ input,
 button {
   outline: 0;
 }
-input {
+input , select {
+  width: 60%;
+}
+input[type="text"], input[type="date"] , select {
   border: none;
   background: #fff;
   font-size: 13px;
@@ -45,6 +48,12 @@ input {
   border-radius: 1px;
   box-shadow: 1px 1px 3px 1px #ccc;
   border: 1px solid #eee;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+input:focus , select:focus {
+  outline: none;
 }
 button {
   cursor: pointer;
@@ -66,10 +75,95 @@ body {
 h3 {
   font-size: 22px;
   font-weight: 400;
-  margin: 0;
+  margin: 15px 0;
 }
 h4 {
   font-size: 18px;
   font-weight: 300;
   margin: 0;
+}
+
+/*======Personel Style =====*/
+
+
+/*======== Utilities ========*/
+.container {
+  width: 80%;
+  margin: 0px auto;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.bg-light {
+    padding: 10px;
+    background: #f7f7f785;
+    box-shadow: 0px 2px 10px #0c0c0c0d;
+}
+
+.card {
+  margin: 15px 8px;
+  padding: 10px;
+  padding: 15px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 15px #0000000d;
+}
+.card-header {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+}
+.card-body {
+  padding: 15px 10px;
+}
+
+.card-footer {
+  padding: 15px 10px;
+  text-align: center;
+}
+.btn {
+    text-transform: capitalize;
+    box-shadow: 0px 3px 10px #0000001c;
+    border-radius: 3px;
+    margin: 10px 5px;
+    padding: 8px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1em;
+}
+.btn-edit {
+  background: #a1b120;
+}
+.btn-delete {
+  background: #c50000;
+}
+.btn-primary {
+  background-color: #757dcecc;
+
+}
+
+.row {
+  width: 80%;
+    margin: 25px auto;
+    border: 1px solid #251c1c08;
+    padding: 25px;
+}
+
+.form-group {
+  margin: 5px 0px;
+  padding: 10px 0px;
+  display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.center {
+  justify-content: center;
+}
+.btn-dark {
+  background-color: #03051fcc;
 }

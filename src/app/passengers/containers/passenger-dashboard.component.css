@@ -1,0 +1,7 @@
+
+  .passenger-list {
+    margin-top: 15px;
+  }
+  .passenger-list .flex {
+      justify-content: space-between;
+  }

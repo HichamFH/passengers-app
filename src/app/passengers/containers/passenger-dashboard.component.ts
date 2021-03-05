@@ -1,43 +1,125 @@
 import { Component, OnInit } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { PassengerService } from "src/app/services/passenger.service";
 
 import { Passenger } from "src/assets/passengers";
-import { PassengerService } from "../passenger.service";
 
 @Component({
   selector: "component-dashboard",
-  template: `
-    <h3>AirLine passengers</h3>
-    <passenger-counter [items]="passengers"></passenger-counter>
-    <passenger-list
-      *ngFor="let passenger of passengers"
-      [passenger]="passenger"
-      (edit)="editPassenger($event)"
-      (remove)="removePassenger($event)"
-    ></passenger-list>
-  `,
+  templateUrl: './passenger-dashboard.component.html',
   styleUrls: ["./passenger-dashboard.component.css"],
 })
 export class PassengerDashboardComponent implements OnInit {
-  public passengers;
+  passengers : Passenger[];
 
-  constructor(private passengerService: PassengerService) {}
+  constructor(private passengerService: PassengerService , private toastr: ToastrService ) {}
 
   ngOnInit() {
-    this.passengers = this.passengerService.getPassengers();
+    this.getAllPassengers();
   }
 
+  // GetAllPassenger Function 
+
+  private getAllPassengers() {
+    this.passengerService.getAllPassengers().subscribe(
+      data => {
+        console.log(data);
+        this.passengers = data;
+      }
+    );
+  }
+
+  onDelete(p: Passenger) {
+    let v=confirm("Etes vous sûre?");
+    if(v==true)
+   this.passengerService.deleteProduct(p)
+     .subscribe(data=>{
+       this.getAllPassengers();
+     })
+ }
+  
+ 
+
   editPassenger(passenger: Passenger) {
+    let ret;
     this.passengers = this.passengers.map((p) => {
       if (p.id === passenger.id) {
-        return Object.assign({}, p, passenger);
+        
+            ret = Object.assign({}, p, passenger);
+
+
+        this.passengerService.updateProduct(passenger).subscribe(
+          res => {
+            this.toastr.success('Update !', 'Updated OK!');
+          },
+          err => {
+            console.log(err)
+          }
+        )
+
       }
-      return p;
+      else {
+        ret = p;
+      }
+      return ret;
     });
   }
 
-  removePassenger(id: number) {
-    this.passengers = this.passengers.filter(
-      (passenger) => passenger.id !== id
-    );
+  removePassenger(p: Passenger) {
+   let v=confirm("Etes vous sûre?");
+    if(v==true)
+   this.passengerService.deleteProduct(p)
+     .subscribe(data=>{
+       this.getAllPassengers();
+     })
   }
+
+  
 }
+
+
+/*
+
+getAllProducts():Observable<Product[]>{
+    //let host=(Math.random()>0.2)?environment.host:environment.unreachableHost;
+    let host=environment.host;
+    return this.http.get<Product[]>(host+"/products");
+  }
+  getSelectedProducts():Observable<Product[]>{
+    let host=environment.host;
+    return this.http.get<Product[]>(host+"/products?selected=true");
+  }
+  getAvailableProducts():Observable<Product[]>{
+    let host=environment.host;
+    return this.http.get<Product[]>(host+"/products?available=true");
+  }
+  searchProducts(keyword:string):Observable<Product[]>{
+    let host=environment.host;
+    return this.http.get<Product[]>(host+"/products?name_like="+keyword);
+  }
+  select(product:Product):Observable<Product>{
+    let host=environment.host;
+    product.selected=!product.selected;
+    return this.http.put<Product>(host+"/products/"+product.id,product);
+  }
+  deleteProduct(product:Product):Observable<void>{
+    let host=environment.host;
+    product.selected=!product.selected;
+    return this.http.delete<void>(host+"/products/"+product.id);
+  }
+  save(product:Product):Observable<Product>{
+    let host=environment.host;
+    return this.http.post<Product>(host+"/products",product);
+  }
+  getProduct(id:number):Observable<Product>{
+    let host=environment.host;
+    return this.http.get<Product>(host+"/products/"+id);
+  }
+  updateProduct(product:Product):Observable<Product>{
+    let host=environment.host;
+    return this.http.put<Product>(host+"/products/"+product.id,product);
+  }
+
+  */

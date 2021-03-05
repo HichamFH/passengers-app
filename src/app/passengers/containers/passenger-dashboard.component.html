@@ -1,0 +1,13 @@
+<div class="paseenger-dashboard bg-light">
+  <div class="container">
+  <!---  <passenger-counter [items]="passengers"></passenger-counter>-->
+    <div class="passenger-list flex">
+      <passenger-list
+        *ngFor="let passenger of passengers"
+        [passenger]="passenger"
+        (edit)="editPassenger($event)"
+        (remove)="removePassenger($event)"
+      ></passenger-list>
+    </div>
+  </div>
+</div>
